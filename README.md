@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Sticky Notes Tempo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Sticky Notes Demo](./demo.gif)
 
-Currently, two official plugins are available:
+A lightweight, performant, and interactive Sticky Notes application built with **React**, **TypeScript**, and **Vite**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- **Create & Manage Notes**: Effortlessly add, edit, and delete notes.
+- **Drag & Resize**: Intuitive pointer events for moving and resizing your notes anywhere on the board.
+- **Color Themes**: Choose from a curated palette of themes to organize your thoughts.
+- **Auto-Persistence**: Your work is automatically saved to local storage—never lose a note again.
+- **Simulated API**: Includes a robust service layer that simulates real-world network latency.
 
-## Expanding the ESLint configuration
+## Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application following a unidirectional data flow pattern, leveraging a centralized `notesReducer` to manage state changes. This ensures that every action whether adding, updating, or removing a note is predictable and easy to debug. The state is then synchronized with a custom `useNotes` hook, which acts as the bridge between the UI components and the persistence layer.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+For persistence and data management, the app utilizes a dual layer approach. A service layer handles both local storage synchronization and simulated asynchronous API calls, mimicking real  world behavior with randomized latency. This separation of concerns allows the UI to remain responsive while complex operations like data serialization and "network" requests happen transparently in the background.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The frontend is built with modular, highly reusable React components that utilize modern Pointer Events for interaction. By abstracting complex drag-and-drop and resizing logic into individual components like `StickyNote` and `Board`, the codebase remains maintainable and extensible. This modularity also facilitated the implementation of comprehensive test suite, allowing to verify each part of the system in isolation.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+I have also added github actions for CI/CD. Automatically runs on pushes to main and feat/tests, and on all pull requests. Executes Linting, Testing (all 55 tests passing), and a Production Build to ensure project stability.
+
+
+## Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (latest LTS recommended)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running the App
+Start the development server:
+```bash
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Testing
+We take stability seriously. The project features a comprehensive test suite powered by **Vitest** and **React Testing Library**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Test Coverage
+The suite includes **55 tests** covering:
+- **Unit Logic**: `notesReducer`, `storage` persistence, `api` services, and `utils`.
+- **Component UI**: Interactive testing for `StickyNote`, `Board`, `Toolbar`, `ColorPicker`, and `TrashZone`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Running Tests
+- **Single Run**:
+  ```bash
+  npm test
+  ```
+- **Watch Mode** (great for development):
+  ```bash
+  npm run test:watch
+  ```
+
+## 🛠️ Built With
+- **React 19** - UI Framework
+- **TypeScript** - Type Safety
+- **Vite** - Build Tooling
+- **Vitest** - Unit & Component Testing
+- **React Testing Library** - DOM Testing Utilities
+- **Vanilla CSS** - Styling
+
