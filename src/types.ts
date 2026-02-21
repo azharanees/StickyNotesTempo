@@ -37,3 +37,14 @@ export const COLOR_MAP: Record<NoteColor, { bg: string; header: string }> = {
   orange: { bg: '#ffe0b2', header: '#ffcc80' },
 };
 
+export const DEFAULT_NOTE_WIDTH = 220;
+export const DEFAULT_NOTE_HEIGHT = 180;
+export const MIN_NOTE_WIDTH = 150;
+export const MIN_NOTE_HEIGHT = 120;
+
+export type NoteAction =
+  | { type: 'ADD'; payload: Note }
+  | { type: 'UPDATE'; payload: { id: string; changes: Partial<Note> } }
+  | { type: 'REMOVE'; payload: string }
+  | { type: 'BRING_TO_FRONT'; payload: string }
+  | { type: 'LOAD'; payload: Note[] };

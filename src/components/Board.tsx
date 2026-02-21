@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react';
+import {  useCallback, useState, useEffect } from 'react';
 import type React from 'react';
 import type { Note, NoteColor } from '../types';
+import { StickyNote } from './StickyNote';
 import { Toolbar } from './Toolbar';
 import './Board.css';
 
@@ -15,8 +16,12 @@ interface BoardProps {
 export function Board({
     notes,
     onAdd,
+    onUpdate,
+    onRemove,
+    onBringToFront,
 }: BoardProps) {
     const [selectedColor, setSelectedColor] = useState<NoteColor>('yellow');
+    const [dragging, setDragging] = useState(false);
 
     const handleDoubleClick = useCallback(
         (e: React.MouseEvent<HTMLDivElement>) => {
@@ -33,6 +38,17 @@ export function Board({
         onAdd(x, y, selectedColor);
     }, [onAdd, selectedColor]);
 
+    const handleDragStateChange = useCallback((isDragging: boolean) => {
+        setDragging(isDragging);
+    }, []);
+
+    useEffect(() => {
+        if (dragging) {
+            document.body.classList.add('dragging');
+        } else {
+            document.body.classList.remove('dragging');
+        }
+    }, [dragging]);
 
     return (
         <>
@@ -52,6 +68,17 @@ export function Board({
                         Double-click anywhere or press <strong>Add Note</strong> to get started
                     </p>
                 </div>
+
+                {notes.map((note) => (
+                    <StickyNote
+                        key={note.id}
+                        note={note}
+                        onUpdate={onUpdate}
+                        onRemove={onRemove}
+                        onBringToFront={onBringToFront}
+                        onDragStateChange={handleDragStateChange}
+                    />
+                ))}
             </div>
 
         </>
