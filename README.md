@@ -21,7 +21,7 @@ For persistence and data management, the app utilizes a dual layer approach. A s
 
 The frontend is built with modular, highly reusable React components that utilize modern Pointer Events for interaction. By abstracting complex drag-and-drop and resizing logic into individual components like `StickyNote` and `Board`, the codebase remains maintainable and extensible. This modularity also facilitated the implementation of comprehensive test suite, allowing to verify each part of the system in isolation.
 
-I have also added github actions for CI/CD. Automatically runs on pushes to main and feat/tests, and on all pull requests. Executes Linting, Testing (all 55 tests passing), and a Production Build to ensure project stability.
+I have also added github actions for CI/CD. Automatically runs on pushes to main, dev and feat/tests, and on all pull requests. Executes Linting, Testing (all 55 tests passing), and a Production Build to ensure project stability.
 
 
 ## Getting Started
