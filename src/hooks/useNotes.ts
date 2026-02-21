@@ -5,7 +5,7 @@ import { generateId } from '../utils';
 import { loadNotes, saveNotes } from '../services/storage'
 import * as api from '../services/api';
 
-function notesReducer(state: Note[], action: NoteAction): Note[] {
+export function notesReducer(state: Note[], action: NoteAction): Note[] {
     switch (action.type) {
         case 'ADD':
             return [...state, action.payload];
