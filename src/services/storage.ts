@@ -1,4 +1,4 @@
-import type { Note } from 'e:/Projects/tempo/src/types';
+import type { Note } from '../types';
 
 const STORAGE_KEY = 'sticky-notes-data';
 

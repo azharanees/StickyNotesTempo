@@ -1,4 +1,4 @@
-import type { Note } from 'e:/Projects/tempo/src/types';
+import type { Note } from '../types';
 import { loadNotes, saveNotes } from './storage';
 
 function simulateLatency(): Promise<void> {
