@@ -1,9 +1,14 @@
-# Sticky Notes Tempo
+
+
+# Sticky Notes App
+
 
 ![Sticky Notes Demo](./demo.gif)
 
 A lightweight, performant, and interactive Sticky Notes application built with **React**, **TypeScript**, and **Vite**.
 
+
+## [Kotlin Cache Issues](./Kotlin_Cache_Issues.md) - Code review of the Kotlin Cache implementation.
 
 
 ## Features
@@ -61,7 +66,7 @@ The suite includes **55 tests** covering:
   npm run test:watch
   ```
 
-## 🛠️ Built With
+## Built With
 - **React 19** - UI Framework
 - **TypeScript** - Type Safety
 - **Vite** - Build Tooling
