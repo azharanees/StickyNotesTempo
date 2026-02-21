@@ -11,6 +11,7 @@ interface StickyNoteProps {
     onRemove: (id: string) => void;
     onBringToFront: (id: string) => void;
     onDragStateChange: (isDragging: boolean) => void;
+    trashRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function StickyNote({
@@ -19,8 +20,10 @@ export function StickyNote({
     onRemove,
     onBringToFront,
     onDragStateChange,
+    trashRef,
 }: StickyNoteProps) {
     const [isEditing, setIsEditing] = useState(false);
+    const [overTrash, setOverTrash] = useState(false);
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const noteRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +34,19 @@ export function StickyNote({
         }
     }, [isEditing]);
 
+    const isOverTrash = useCallback(
+        (clientX: number, clientY: number): boolean => {
+            if (!trashRef.current) return false;
+            const rect = trashRef.current.getBoundingClientRect();
+            return (
+                clientX >= rect.left &&
+                clientX <= rect.right &&
+                clientY >= rect.top &&
+                clientY <= rect.bottom
+            );
+        },
+        [trashRef],
+    );
 
     const handleMoveStart = useCallback(
         (e: React.PointerEvent) => {
@@ -56,6 +72,7 @@ export function StickyNote({
                 const dx = ev.clientX - startX;
                 const dy = ev.clientY - startY;
                 onUpdate(note.id, { x: origX + dx, y: origY + dy });
+                setOverTrash(isOverTrash(ev.clientX, ev.clientY));
             };
 
             const onUp = (ev: PointerEvent) => {
@@ -63,12 +80,17 @@ export function StickyNote({
                 el.removeEventListener('pointerup', onUp);
                 el.releasePointerCapture(ev.pointerId);
                 onDragStateChange(false);
+
+                if (isOverTrash(ev.clientX, ev.clientY)) {
+                    onRemove(note.id);
+                }
+                setOverTrash(false);
             };
 
             el.addEventListener('pointermove', onMove);
             el.addEventListener('pointerup', onUp);
         },
-        [note.id, note.x, note.y, isEditing, onUpdate, onRemove, onBringToFront, onDragStateChange],
+        [note.id, note.x, note.y, isEditing, onUpdate, onRemove, onBringToFront, onDragStateChange, isOverTrash],
     );
 
     const handleResizeStart = useCallback(
@@ -137,7 +159,7 @@ export function StickyNote({
     return (
         <div
             ref={noteRef}
-            className={`sticky-note`}
+            className={`sticky-note${overTrash ? ' sticky-note--over-trash' : ''}`}
             style={{
                 left: note.x,
                 top: note.y,

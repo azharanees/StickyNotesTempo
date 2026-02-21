@@ -1,7 +1,8 @@
-import {  useCallback, useState, useEffect } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
 import type React from 'react';
 import type { Note, NoteColor } from '../types';
 import { StickyNote } from './StickyNote';
+import { TrashZone } from './TrashZone';
 import { Toolbar } from './Toolbar';
 import './Board.css';
 
@@ -20,6 +21,7 @@ export function Board({
     onRemove,
     onBringToFront,
 }: BoardProps) {
+    const trashRef = useRef<HTMLDivElement>(null);
     const [selectedColor, setSelectedColor] = useState<NoteColor>('yellow');
     const [dragging, setDragging] = useState(false);
 
@@ -77,10 +79,12 @@ export function Board({
                         onRemove={onRemove}
                         onBringToFront={onBringToFront}
                         onDragStateChange={handleDragStateChange}
+                        trashRef={trashRef}
                     />
                 ))}
             </div>
 
+            <TrashZone innerRef={trashRef} isActive={dragging} />
         </>
     );
 }
