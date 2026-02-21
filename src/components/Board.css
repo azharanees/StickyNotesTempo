@@ -1,0 +1,41 @@
+.board {
+    position: fixed;
+    inset: 0;
+    top: 52px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(79, 195, 247, 0.05), transparent 60%),
+        radial-gradient(circle at 80% 70%, rgba(206, 147, 216, 0.05), transparent 60%),
+        linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%);
+}
+
+.board::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+}
+
+.board__hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.board__hint-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
+.board__hint-sub {
+    font-size: 14px;
+    margin: 0;
+}

@@ -1,0 +1,36 @@
+.color-picker {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.color-picker--md {
+  gap: 6px;
+}
+
+.color-dot {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.12s ease, border-color 0.12s ease;
+}
+
+.color-picker--sm .color-dot {
+  width: 14px;
+  height: 14px;
+}
+
+.color-picker--md .color-dot {
+  width: 22px;
+  height: 22px;
+}
+
+.color-dot:hover {
+  transform: scale(1.25);
+}
+
+.color-dot--active {
+  border-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
