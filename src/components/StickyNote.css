@@ -1,0 +1,112 @@
+.sticky-note {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    box-shadow:
+        2px 4px 12px rgba(0, 0, 0, 0.12),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+    user-select: none;
+    transition:
+        box-shadow 0.18s ease,
+        opacity 0.15s ease;
+    overflow: hidden;
+}
+
+.sticky-note:hover {
+    box-shadow:
+        3px 6px 18px rgba(0, 0, 0, 0.18),
+        0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.sticky-note--over-trash {
+    opacity: 0.55;
+    box-shadow:
+        0 0 0 3px rgba(244, 67, 54, 0.6),
+        2px 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sticky-note__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 8px;
+    cursor: grab;
+    flex-shrink: 0;
+}
+
+.sticky-note__header:active {
+    cursor: grabbing;
+}
+
+.sticky-note__delete {
+    background: none;
+    border: none;
+    font-size: 18px;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    padding: 0 2px;
+    border-radius: 3px;
+    transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+.sticky-note__delete:hover {
+    color: #d32f2f;
+    background-color: rgba(211, 47, 47, 0.1);
+}
+
+.sticky-note__body {
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.sticky-note__text {
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    height: 100%;
+    overflow-y: auto;
+    color: #333;
+}
+
+.sticky-note__placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    font-style: italic;
+}
+
+.sticky-note__textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    background: transparent;
+    color: #333;
+}
+
+.sticky-note__resize {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    cursor: nwse-resize;
+    background:
+        linear-gradient(135deg,
+            transparent 40%,
+            rgba(0, 0, 0, 0.12) 40%,
+            rgba(0, 0, 0, 0.12) 50%,
+            transparent 50%,
+            transparent 65%,
+            rgba(0, 0, 0, 0.12) 65%,
+            rgba(0, 0, 0, 0.12) 75%,
+            transparent 75%);
+}

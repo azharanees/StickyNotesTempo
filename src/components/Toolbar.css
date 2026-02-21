@@ -1,0 +1,113 @@
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: rgba(30, 30, 30, 0.75);
+    backdrop-filter: blur(14px);
+    z-index: 9999;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.toolbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+.toolbar__logo {
+    opacity: 0.9;
+}
+
+.toolbar__title {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.toolbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toolbar__color-section {
+    position: relative;
+}
+
+.toolbar__color-toggle {
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 0;
+    transition: border-color 0.15s ease;
+}
+
+.toolbar__color-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.toolbar__color-preview {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.toolbar__color-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: rgba(40, 40, 40, 0.92);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    animation: dropdown-in 0.15s ease;
+}
+
+@keyframes dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.toolbar__add-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #4fc3f7;
+    color: #1a1a1a;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.toolbar__add-btn:hover {
+    background: #29b6f6;
+}
+
+.toolbar__add-btn:active {
+    transform: scale(0.97);
+}
