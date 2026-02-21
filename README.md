@@ -1,4 +1,4 @@
-# Sticky Notes Tempo
+# Sticky Notes App
 
 ![Sticky Notes Demo](./demo.gif)
 
