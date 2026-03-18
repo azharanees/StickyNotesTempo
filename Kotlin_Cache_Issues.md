@@ -112,7 +112,7 @@ Either:
 
 ---
 
-## Issue 7: Hardcoded, Non-Configurable TTL (Low)
+## Issue 5: Hardcoded, Non-Configurable TTL (Low)
 
 `ttlMs` is currently hardcoded as a compile-time constant. This prevents reuse of the cache for varying TTL requirements (e.g., session data vs. product listings).
 
